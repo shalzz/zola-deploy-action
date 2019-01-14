@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-if [[ ! -z "$TOKEN" ]]; then
+if [[ -n "$TOKEN" ]]; then
     GITHUB_TOKEN=$TOKEN
 fi
 
@@ -34,7 +34,7 @@ main() {
     git add .
 
     git commit -m "Deploy ${GITHUB_REPOSITORY} to ${GITHUB_REPOSITORY}:$remote_branch"
-    git push --force $remote_repo master:$remote_branch
+    git push --force "$remote_repo master:$remote_branch"
 
     echo "Deploy complete"
 }
