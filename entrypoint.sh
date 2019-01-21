@@ -36,8 +36,8 @@ main() {
 
     cd public
     git init
-    git config user.name "${GITHUB_ACTOR}"
-    git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+    git config user.name "GitHub Actions"
+    git config user.email "github-actions-bot@users.noreply.github.com"
     git add .
 
     git commit -m "Deploy ${GITHUB_REPOSITORY} to ${GITHUB_REPOSITORY}:$remote_branch"
