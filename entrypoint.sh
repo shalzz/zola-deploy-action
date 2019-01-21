@@ -28,7 +28,7 @@ main() {
     remote_repo="https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
     remote_branch="master"
 
-    echo "Building site with $version"
+    echo "Using $version"
 
     zola build
 
