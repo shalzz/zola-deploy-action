@@ -3,6 +3,12 @@
 A GitHub action to automatically build and deploy your [zola] site to the master
 branch as GitHub Pages.
 
+## Table of Contents
+
+ - [Usage](#usage)
+ - [Secrets](#secrets)
+ - [Custom Domain](#custom-domain)
+
 ## Usage
 
 ```
