@@ -13,9 +13,16 @@ workflow "Build and deploy on push" {
 
 action "zola deploy" {
   uses = "shalzz/zola-deploy-action@master"
-  secrets = ["GITHUB_TOKEN"]
+  secrets = ["TOKEN"]
 }
 ```
+
+## Secrets
+
+ * `TOKEN`: Personal Access key with the scope `public_repo`, we need this
+    to push the site files back to the repo.
+    
+    ( Actions already provides a `GITHUB_TOKEN` which is an installation token and does not trigger a GitHub Pages builds hence we need a personal access token )
 
 ## Custom Domain 
 
