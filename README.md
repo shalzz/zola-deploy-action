@@ -20,6 +20,9 @@ workflow "Build and deploy on push" {
 action "zola deploy" {
   uses = "shalzz/zola-deploy-action@master"
   secrets = ["TOKEN"]
+  env = {
+    PAGES_BRANCH = "master"
+  }
 }
 ```
 
@@ -30,7 +33,10 @@ action "zola deploy" {
     
     ( Actions already provides a `GITHUB_TOKEN` which is an installation token and does not trigger a GitHub Pages builds hence we need a personal access token )
 
-## Custom Domain 
+## Environment Variables
+* `PAGES_BRANCH`: The git branch of your repo to which the built static files will be pushed. Default is `master` branch
+
+## Custom Domain
 
 If you're using a custom domain for your GitHub Pages site put the CNAME 
 in `static/CNAME` so that zola puts it in the root of the public folder
