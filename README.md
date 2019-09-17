@@ -12,18 +12,19 @@ branch as GitHub Pages.
 ## Usage
 
 ```
-workflow "Build and deploy on push" {
-  on = "push"
-  resolves = ["zola deploy"]
-}
-
-action "zola deploy" {
-  uses = "shalzz/zola-deploy-action@master"
-  secrets = ["TOKEN"]
-  env = {
-    PAGES_BRANCH = "master"
-  }
-}
+on: push
+name: Build and deploy on push
+jobs:
+  build:
+    name: shalzz/zola-deploy-action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: shalzz/zola-deploy-action
+      uses: shalzz/zola-deploy-action@master
+      env:
+        PAGES_BRANCH: master
+        TOKEN: ${{ secrets.TOKEN }}
 ```
 
 ## Secrets
