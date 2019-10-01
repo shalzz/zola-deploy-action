@@ -6,7 +6,7 @@ if [[ -n "$TOKEN" ]]; then
     GITHUB_TOKEN=$TOKEN
 fi
 
-if [[ -n "$PAGES_BRANCH" ]]; then
+if [[ -z "$PAGES_BRANCH" ]]; then
     PAGES_BRANCH="master"
 fi
 
