@@ -10,6 +10,10 @@ if [[ -z "$PAGES_BRANCH" ]]; then
     PAGES_BRANCH="master"
 fi
 
+if [[ -z "$DIRECTORY" ]]; then
+    DIRECTORY="."
+fi
+
 if [[ -z "$GITHUB_TOKEN" ]]; then
     echo "Set the GITHUB_TOKEN env variable."
     exit 1
@@ -34,6 +38,8 @@ main() {
 
     echo "Using $version"
 
+    cd $DIRECTORY
+    
     zola build
 
     echo "Pushing artifacts to ${GITHUB_REPOSITORY}:$remote_branch"
