@@ -10,8 +10,8 @@ if [[ -z "$PAGES_BRANCH" ]]; then
     PAGES_BRANCH="master"
 fi
 
-if [[ -z "$DIRECTORY" ]]; then
-    DIRECTORY="."
+if [[ -z "$BUILD_DIR" ]]; then
+    BUILD_DIR="."
 fi
 
 if [[ -z "$GITHUB_TOKEN" ]]; then
@@ -38,7 +38,7 @@ main() {
 
     echo "Using $version"
 
-    cd $DIRECTORY
+    cd $BUILD_DIR
     
     zola build
 

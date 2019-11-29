@@ -24,6 +24,7 @@ jobs:
       uses: shalzz/zola-deploy-action@master
       env:
         PAGES_BRANCH: master
+        PAGES_BRANCH: docs
         TOKEN: ${{ secrets.TOKEN }}
 ```
 
@@ -36,6 +37,7 @@ jobs:
 
 ## Environment Variables
 * `PAGES_BRANCH`: The git branch of your repo to which the built static files will be pushed. Default is `master` branch
+* `BUILD_DIR`: The zola build directory. Default is `.` (current directory)
 
 ## Custom Domain
 
