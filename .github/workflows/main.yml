@@ -1,12 +1,11 @@
-name: Tests
-
 # Trigger the workflow on push or pull request
 on: [push, pull_request]
 
+name: Tests
 jobs:
   test:
-    runs-on: ubuntu-latest
     name: Run Tests
+    runs-on: ubuntu-latest
     steps:
     - name: Shellcheck
       uses: docker://koalaman/shellcheck:latest
