@@ -25,6 +25,7 @@ jobs:
       env:
         PAGES_BRANCH: master
         BUILD_DIR: docs
+        BUILD_FLAGS: --drafts
         TOKEN: ${{ secrets.TOKEN }}
 ```
 
@@ -38,6 +39,7 @@ jobs:
 ## Environment Variables
 * `PAGES_BRANCH`: The git branch of your repo to which the built static files will be pushed. Default is `master` branch
 * `BUILD_DIR`: The path from the root of the repo where we should run the `zola build` command. Default is `.` (current directory)
+* `BUILD_FLAGS`: Custom build flags that you want to pass to zola while building. (Be careful supplying a different build output directory might break the action).
 
 ## Custom Domain
 
