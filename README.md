@@ -31,8 +31,10 @@ jobs:
 
 ## Secrets
 
- * `TOKEN`: Personal Access key with the scope `public_repo`, we need this
-    to push the site files back to the repo.
+ * `TOKEN`: [Personal Access key][] with the appropriate scope. If the
+    repository is public the `public_repo` scope suffices, for private
+    repositories the full `repo` scope is required. We need this to push
+    the site files back to the repo.
     
     ( Actions already provides a `GITHUB_TOKEN` which is an installation token and does not trigger a GitHub Pages builds hence we need a personal access token )
 
@@ -48,3 +50,4 @@ in `static/CNAME` so that zola puts it in the root of the public folder
 which is where GitHub expects it to be.
 
 [zola]: https://github.com/getzola/zola
+[Personal Access key]: https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
