@@ -45,7 +45,7 @@ main() {
     cd $BUILD_DIR
     
     echo "Building with flags: $BUILD_FLAGS"
-    zola build $BUILD_FLAGS
+    zola build "$BUILD_FLAGS"
 
     echo "Pushing artifacts to ${GITHUB_REPOSITORY}:$remote_branch"
 
