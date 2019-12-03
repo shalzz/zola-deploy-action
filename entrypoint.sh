@@ -14,10 +14,6 @@ if [[ -z "$BUILD_DIR" ]]; then
     BUILD_DIR="."
 fi
 
-if [[ -z "$BUILD_FLAGS" ]]; then
-    BUILD_FLAGS=""
-fi
-
 if [[ -z "$GITHUB_TOKEN" ]]; then
     echo "Set the GITHUB_TOKEN env variable."
     exit 1
@@ -44,8 +40,8 @@ main() {
 
     cd $BUILD_DIR
     
-    echo "Building with flags: $BUILD_FLAGS"
-    zola build "$BUILD_FLAGS"
+    echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
+    zola build ${BUILD_FLAGS:+"$BUILD_FLAGS"}
 
     echo "Pushing artifacts to ${GITHUB_REPOSITORY}:$remote_branch"
 
