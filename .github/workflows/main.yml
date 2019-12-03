@@ -1,10 +1,10 @@
 # Trigger the workflow on push or pull request
 on: [push, pull_request]
 
-name: Tests
+name: Test
 jobs:
   test:
-    name: Run Tests
+    name: Static Analysis
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master

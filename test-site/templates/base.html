@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+{% import "macros.html" as macros %}
+
+{% block htmltitle %}
+{% endblock htmltitle %}
+
+{% block body %}
+    <div class="wrap">
+        <div class="section" id="title">
+            {% block title %}{% endblock title %}
+        </div>
+        <div class="section" id="content">
+            {% block content %}{% endblock content %}
+        </div>
+        {{ macros::bottom_menu() }}
+        {{ macros::footer() }}
+    </div>
+{% endblock body %}

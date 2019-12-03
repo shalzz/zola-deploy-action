@@ -1,0 +1,21 @@
+dist: bionic
+
+language: generic
+
+install:
+  - bash <(curl https://gist.githubusercontent.com/janbaudisch/555112ffe141bb9a3ac07f14b86a329a/raw/659f3713eec58c1945fb9246ecf1ba571fd6f064/install-zola.sh)
+
+script:
+  - zola build
+  - echo zola-sam.janbaudisch.dev > public/CNAME
+
+deploy:
+  provider: pages
+  target-branch: gh-pages
+  local-dir: public
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  name: flyingB0tat0
+  email: bot@baudisch.xyz
+  keep-history: false
+  allow-empty-commit: true

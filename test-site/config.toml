@@ -1,0 +1,33 @@
+base_url = "https://zola-sam.janbaudisch.dev"
+title = "Sam"
+
+compile_sass = true
+
+highlight_code = true
+
+build_search_index = false
+
+check_external_links = true
+
+taxonomies = [
+    {name = "tags", rss = true}
+]
+
+[extra]
+show_word_count = true
+show_reading_time = true
+
+date_format = "%a %b %e, %Y"
+
+home = "home"
+
+sam_menu = [
+    { text = "posts", link = "/posts" },
+    { text = "about", link = "/about" },
+    { text = "github", link = "https://github.com" }
+]
+
+sam_bottom_menu = true
+
+[extra.sam_footer]
+text = "Some footer text."

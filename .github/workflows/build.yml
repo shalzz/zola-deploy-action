@@ -1,0 +1,28 @@
+# Trigger the workflow on push or pull request
+on: [push, pull_request]
+
+name: Build
+jobs:
+  build-1:
+    name: Build with minimal options
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Build with the latest action rev
+      uses: shalzz/zola-deploy-action@master
+      env:
+        PAGES_BRANCH: gh-pages
+        BUILD_DIR: test-site
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build-2:
+    name: Build with BUILD_FLAGS
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Build with the latest action rev
+      uses: shalzz/zola-deploy-action@master
+      env:
+        PAGES_BRANCH: gh-pages
+        BUILD_DIR: test-site
+        BUILD_FLAGS: --drafts
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
