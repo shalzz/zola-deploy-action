@@ -7,7 +7,7 @@ if [[ -n "$TOKEN" ]]; then
 fi
 
 if [[ -z "$PAGES_BRANCH" ]]; then
-    PAGES_BRANCH="master"
+    PAGES_BRANCH="gh-pages"
 fi
 
 if [[ -z "$BUILD_DIR" ]]; then
