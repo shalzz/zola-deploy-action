@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% import "macros.html" as macros %}
+
+{% block htmltitle %}
+    {{ term.name }} - {{ config.title }}
+{% endblock htmltitle %}
+
+{% block title %}
+    {{ term.name }}
+{% endblock title %}
+
+{% block content %}
+<ul>
+    {% for page in term.pages %}
+        <li>
+            {% if page.date %}
+                {{ macros::format_date(date=page.date) }} -- 
+            {% endif %}
+            <a href="{{ page.permalink }}">{{ macros::title_or_last(component=page, offset=0) }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

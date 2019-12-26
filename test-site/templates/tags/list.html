@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block htmltitle %}
+    Tags - {{ config.title }}
+{% endblock htmltitle %}
+
+{% block title %}
+    Tags
+{% endblock title %}
+
+{% block content %}
+<ul>
+    {% for tag in terms %}
+        <li><a href="{{ tag.permalink }}">{{ tag.name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock content %}
