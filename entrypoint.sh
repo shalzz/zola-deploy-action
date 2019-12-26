@@ -38,6 +38,7 @@ main() {
 
     echo "Using $version"
 
+    echo "Building in $BUILD_DIR directory"
     cd $BUILD_DIR
     
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
