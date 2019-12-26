@@ -39,7 +39,7 @@ jobs:
     ( Actions already provides a `GITHUB_TOKEN` which is an installation token and does not trigger a GitHub Pages builds hence we need a personal access token )
 
 ## Environment Variables
-* `PAGES_BRANCH`: The git branch of your repo to which the built static files will be pushed. Default is `master` branch
+* `PAGES_BRANCH`: The git branch of your repo to which the built static files will be pushed. Default is `gh-pages` branch
 * `BUILD_DIR`: The path from the root of the repo where we should run the `zola build` command. Default is `.` (current directory)
 * `BUILD_FLAGS`: Custom build flags that you want to pass to zola while building. (Be careful supplying a different build output directory might break the action).
 
