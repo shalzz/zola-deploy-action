@@ -1,0 +1,28 @@
+ARG RUSTC_VERSION=1.42.0
+
+FROM clux/muslrust:${RUSTC_VERSION}-stable as builder
+#FROM rust:${RUSTC_VERSION}-slim-stretch as builder
+
+ENV ZOLA_VERSION 0.10.1
+
+RUN apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
+    wget
+
+RUN wget https://github.com/getzola/zola/archive/v${ZOLA_VERSION}.tar.gz && \
+    mkdir zola && \
+    tar -zxvf v${ZOLA_VERSION}.tar.gz -C zola && \
+    mv zola/zola-${ZOLA_VERSION}/* zola/ && \
+    rm -f v${ZOLA_VERSION}.tar.gz
+
+WORKDIR zola
+
+ENV RUST_BACKTRACE=1
+
+RUN cargo build --release
+
+FROM alpine
+
+COPY --from=builder /zola/target/release/zola /usr/local/bin/
+
+CMD ["zola"]
