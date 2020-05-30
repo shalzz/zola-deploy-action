@@ -1,28 +1,38 @@
-ARG RUSTC_VERSION=1.42.0
-
-FROM clux/muslrust:${RUSTC_VERSION}-stable as builder
-#FROM rust:${RUSTC_VERSION}-slim-stretch as builder
+#FROM rust:1.42-alpine as builder
+#FROM ekidd/rust-musl-builder:1.42.0 as builder
+FROM clux/muslrust:1.42.0-stable as builder
 
 ENV ZOLA_VERSION 0.10.1
 
+#RUN apk add --update musl-dev pkgconf npm libsass make g++ git wget
+
 RUN apt-get update -y && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
-    wget
+   DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
+   wget
+#  libsass-dev \
+#  libsass0
 
 RUN wget https://github.com/getzola/zola/archive/v${ZOLA_VERSION}.tar.gz && \
     mkdir zola && \
-    tar -zxvf v${ZOLA_VERSION}.tar.gz -C zola && \
-    mv zola/zola-${ZOLA_VERSION}/* zola/ && \
+    tar -zxvf v${ZOLA_VERSION}.tar.gz && \
+    mv zola-${ZOLA_VERSION}/* zola/ && \
     rm -f v${ZOLA_VERSION}.tar.gz
 
 WORKDIR zola
 
 ENV RUST_BACKTRACE=1
+ENV OPENSSL_STATIC=1
+ENV OPENSSL_LIB_DIR=/musl/lib
+ENV OPENSSL_INCLUDE_DIR=/musl/include
+ENV X86_64_UNKNOWN_LINUX_MUSL_OPENSSL_LIB_DIR=/musl/lib
+ENV X86_64_UNKNOWN_LINUX_MUSL_OPENSSL_INCLUDE_DIR=/musl/include
+ENV RUSTFLAGS="-C target-feature=+crt-static"
 
 RUN cargo build --release
 
 FROM alpine
 
-COPY --from=builder /zola/target/release/zola /usr/local/bin/
+RUN apk --no-cache add ca-certificates
+COPY --from=builder /volume/zola/target/x86_64-unknown-linux-musl/release/zola /usr/local/bin/
 
 CMD ["zola"]
