@@ -48,7 +48,7 @@ main() {
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+"$BUILD_FLAGS"}
 
-    if !${BUILD_ONLY}; then
+    if ! ${BUILD_ONLY}; then
         echo "Pushing artifacts to ${GITHUB_REPOSITORY}:$remote_branch"
 
         cd public
