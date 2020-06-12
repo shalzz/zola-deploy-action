@@ -14,6 +14,8 @@ branch as GitHub Pages.
 
 ## Usage
 
+This example will build on push to any branch, then deploy to gh-pages.
+
 ```
 on: push
 name: Build and deploy on push
@@ -32,6 +34,40 @@ jobs:
         TOKEN: ${{ secrets.TOKEN }}
 ```
 
+This example will build and deploy on master branch to gh-pages branch.
+Additionally will build only on pull requests.
+```
+on:
+  push:
+    branches:
+      - master 
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/master'
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Build only' 
+        uses: shalzz/zola-deploy-action@master
+        env:
+          BUILD_DIR: .
+          TOKEN: ${{ secrets.TOKEN }}
+          BUILD_ONLY: true
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Build and deploy'
+        uses: shalzz/zola-deploy-action@master
+        env:
+          PAGES_BRANCH: gh-pages
+          BUILD_DIR: .
+          TOKEN: ${{ secrets.TOKEN }}
+```
 ## Secrets
 
  * `TOKEN`: [Personal Access key][] with the appropriate scope. If the
@@ -45,6 +81,7 @@ jobs:
 * `PAGES_BRANCH`: The git branch of your repo to which the built static files will be pushed. Default is `gh-pages` branch
 * `BUILD_DIR`: The path from the root of the repo where we should run the `zola build` command. Default is `.` (current directory)
 * `BUILD_FLAGS`: Custom build flags that you want to pass to zola while building. (Be careful supplying a different build output directory might break the action).
+* `BUILD_ONLY`: Set to value `true` if you don't want to deploy after `zola build`.
 
 ## Custom Domain
 
