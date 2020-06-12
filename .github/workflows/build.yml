@@ -26,3 +26,15 @@ jobs:
         BUILD_DIR: test-site
         BUILD_FLAGS: --drafts
         TOKEN: ${{ secrets.TOKEN }}
+  build-3:
+    name: Build and skip deploy 
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Build only with the latest action rev.
+      uses: shalzz/zola-deploy-action@master
+      env:
+        PAGES_BRANCH: build-test-3
+        BUILD_DIR: test-site
+        TOKEN: ${{ secrets.TOKEN }}
+        BUILD_ONLY: true

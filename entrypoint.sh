@@ -24,6 +24,10 @@ if [[ -z "$GITHUB_REPOSITORY" ]]; then
     exit 1
 fi
 
+if [[ -z "$BUILD_ONLY" ]]; then
+    BUILD_ONLY=false
+fi
+
 main() {
     echo "Starting deploy..."
 
@@ -44,18 +48,23 @@ main() {
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+"$BUILD_FLAGS"}
 
-    echo "Pushing artifacts to ${GITHUB_REPOSITORY}:$remote_branch"
+    if ${BUILD_ONLY}; then
+        echo "Build complete. Deployment skipped by request"
+        exit 0
+    else 
+        echo "Pushing artifacts to ${GITHUB_REPOSITORY}:$remote_branch"
 
-    cd public
-    git init
-    git config user.name "GitHub Actions"
-    git config user.email "github-actions-bot@users.noreply.github.com"
-    git add .
+        cd public
+        git init
+        git config user.name "GitHub Actions"
+        git config user.email "github-actions-bot@users.noreply.github.com"
+        git add .
 
-    git commit -m "Deploy ${GITHUB_REPOSITORY} to ${GITHUB_REPOSITORY}:$remote_branch"
-    git push --force "${remote_repo}" master:${remote_branch}
+        git commit -m "Deploy ${GITHUB_REPOSITORY} to ${GITHUB_REPOSITORY}:$remote_branch"
+        git push --force "${remote_repo}" master:${remote_branch}
 
-    echo "Deploy complete"
+        echo "Deploy complete"
+    fi
 }
 
 main "$@"
