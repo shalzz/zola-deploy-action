@@ -48,7 +48,10 @@ main() {
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+"$BUILD_FLAGS"}
 
-    if ! ${BUILD_ONLY}; then
+    if ${BUILD_ONLY}; then
+        echo "Build complete. Deployment skipped by request"
+        exit 0
+    else 
         echo "Pushing artifacts to ${GITHUB_REPOSITORY}:$remote_branch"
 
         cd public
@@ -61,9 +64,6 @@ main() {
         git push --force "${remote_repo}" master:${remote_branch}
 
         echo "Deploy complete"
-    else 
-        echo "Build complete. Deployment skipped by request"
-        exit 0
     fi
 }
 
