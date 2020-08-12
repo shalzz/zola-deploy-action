@@ -48,7 +48,8 @@ main() {
     cd $BUILD_DIR
 
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
-    zola build ${BUILD_FLAGS:+"$BUILD_FLAGS"}
+    ARR_FLAGS=($(echo $BUILD_FLAGS | tr " " "\n"))
+    zola build "${ARR_FLAGS[@]}"
 
     if ${BUILD_ONLY}; then
         echo "Build complete. Deployment skipped by request"
