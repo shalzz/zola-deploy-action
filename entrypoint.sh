@@ -31,10 +31,12 @@ fi
 main() {
     echo "Starting deploy..."
 
-    echo "Fetching themes"
     git config --global url."https://".insteadOf git://
     git config --global url."https://github.com/".insteadOf git@github.com:
-    git submodule update --init --recursive
+    if [[ -z "$BUILD_NO_THEMES" ]]; then
+        echo "Fetching themes"
+        git submodule update --init --recursive
+    fi
 
     version=$(zola --version)
     remote_repo="https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
@@ -44,7 +46,7 @@ main() {
 
     echo "Building in $BUILD_DIR directory"
     cd $BUILD_DIR
-    
+
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+"$BUILD_FLAGS"}
 
