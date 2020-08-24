@@ -24,7 +24,7 @@ jobs:
       env:
         PAGES_BRANCH: build-test-2
         BUILD_DIR: test-site
-        BUILD_FLAGS: --drafts
+        BUILD_FLAGS: --drafts --base-url example.com
         TOKEN: ${{ secrets.TOKEN }}
   build-3:
     name: Build and skip deploy 
