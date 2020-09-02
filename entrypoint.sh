@@ -28,12 +28,16 @@ if [[ -z "$BUILD_ONLY" ]]; then
     BUILD_ONLY=false
 fi
 
+if [[ -z "$BUILD_THEMES" ]]; then
+    BUILD_THEMES=true
+fi
+
 main() {
     echo "Starting deploy..."
 
     git config --global url."https://".insteadOf git://
     git config --global url."https://github.com/".insteadOf git@github.com:
-    if [[ -z "$BUILD_NO_THEMES" ]]; then
+    if [[ "$BUILD_THEMES" ]]; then
         echo "Fetching themes"
         git submodule update --init --recursive
     fi
