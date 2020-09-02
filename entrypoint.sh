@@ -28,13 +28,19 @@ if [[ -z "$BUILD_ONLY" ]]; then
     BUILD_ONLY=false
 fi
 
+if [[ -z "$BUILD_THEMES" ]]; then
+    BUILD_THEMES=true
+fi
+
 main() {
     echo "Starting deploy..."
 
-    echo "Fetching themes"
     git config --global url."https://".insteadOf git://
     git config --global url."https://github.com/".insteadOf git@github.com:
-    git submodule update --init --recursive
+    if [[ "$BUILD_THEMES" ]]; then
+        echo "Fetching themes"
+        git submodule update --init --recursive
+    fi
 
     version=$(zola --version)
     remote_repo="https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
@@ -44,9 +50,9 @@ main() {
 
     echo "Building in $BUILD_DIR directory"
     cd $BUILD_DIR
-    
+
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
-    zola build ${BUILD_FLAGS:+"$BUILD_FLAGS"}
+    zola build ${BUILD_FLAGS:+$BUILD_FLAGS}
 
     if ${BUILD_ONLY}; then
         echo "Build complete. Deployment skipped by request"

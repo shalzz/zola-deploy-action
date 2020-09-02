@@ -82,6 +82,7 @@ jobs:
 * `BUILD_DIR`: The path from the root of the repo where we should run the `zola build` command. Default is `.` (current directory)
 * `BUILD_FLAGS`: Custom build flags that you want to pass to zola while building. (Be careful supplying a different build output directory might break the action).
 * `BUILD_ONLY`: Set to value `true` if you don't want to deploy after `zola build`.
+* `BUILD_THEMES`: Set to false to disable fetching themes submodules. Default `true`.
 
 ## Custom Domain
 
