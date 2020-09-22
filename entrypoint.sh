@@ -14,11 +14,6 @@ if [[ -z "$BUILD_DIR" ]]; then
     BUILD_DIR="."
 fi
 
-if [[ -z "$GITHUB_TOKEN" ]]; then
-    echo "Set the GITHUB_TOKEN env variable."
-    exit 1
-fi
-
 if [[ -z "$GITHUB_REPOSITORY" ]]; then
     echo "Set the GITHUB_REPOSITORY env variable."
     exit 1
@@ -30,6 +25,11 @@ fi
 
 if [[ -z "$BUILD_THEMES" ]]; then
     BUILD_THEMES=true
+fi
+
+if [[ -z "$GITHUB_TOKEN" ]] && [[ "$BUILD_ONLY" == false ]]; then
+    echo "Set the GITHUB_TOKEN env variable."
+    exit 1
 fi
 
 main() {
