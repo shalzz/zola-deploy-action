@@ -14,9 +14,14 @@ if [[ -z "$BUILD_DIR" ]]; then
     BUILD_DIR="."
 fi
 
-if [[ -z "$GITHUB_REPOSITORY" ]]; then
-    echo "Set the GITHUB_REPOSITORY env variable."
-    exit 1
+if [[ -n "$REPOSITORY" ]]; then
+    TARGET_REPOSITORY=$REPOSITORY
+else
+    if [[ -z "$GITHUB_REPOSITORY" ]]; then
+        echo "Set the GITHUB_REPOSITORY env variable."
+        exit 1
+    fi
+    TARGET_REPOSITORY=${GITHUB_REPOSITORY}
 fi
 
 if [[ -z "$BUILD_ONLY" ]]; then
@@ -43,7 +48,7 @@ main() {
     fi
 
     version=$(zola --version)
-    remote_repo="https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+    remote_repo="https://${GITHUB_TOKEN}@github.com/${TARGET_REPOSITORY}.git"
     remote_branch=$PAGES_BRANCH
 
     echo "Using $version"
@@ -57,8 +62,8 @@ main() {
     if ${BUILD_ONLY}; then
         echo "Build complete. Deployment skipped by request"
         exit 0
-    else 
-        echo "Pushing artifacts to ${GITHUB_REPOSITORY}:$remote_branch"
+    else
+        echo "Pushing artifacts to ${TARGET_REPOSITORY}:$remote_branch"
 
         cd public
         git init
@@ -66,7 +71,7 @@ main() {
         git config user.email "github-actions-bot@users.noreply.github.com"
         git add .
 
-        git commit -m "Deploy ${GITHUB_REPOSITORY} to ${GITHUB_REPOSITORY}:$remote_branch"
+        git commit -m "Deploy ${TARGET_REPOSITORY} to ${TARGET_REPOSITORY}:$remote_branch"
         git push --force "${remote_repo}" master:${remote_branch}
 
         echo "Deploy complete"
