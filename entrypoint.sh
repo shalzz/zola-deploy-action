@@ -37,18 +37,23 @@ if [[ -z "$GITHUB_TOKEN" ]] && [[ "$BUILD_ONLY" == false ]]; then
     exit 1
 fi
 
+if [[ -z "$GITHUB_HOSTNAME" ]]; then
+    GITHUB_HOSTNAME="github.com"
+fi
+
 main() {
     echo "Starting deploy..."
 
     git config --global url."https://".insteadOf git://
-    git config --global url."https://github.com/".insteadOf git@github.com:
+    ## $GITHUB_SERVER_URL is set as a default environment variable in all workflows, default is https://github.com
+    git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@${GITHUB_HOSTNAME}":
     if [[ "$BUILD_THEMES" ]]; then
         echo "Fetching themes"
         git submodule update --init --recursive
     fi
 
     version=$(zola --version)
-    remote_repo="https://${GITHUB_TOKEN}@github.com/${TARGET_REPOSITORY}.git"
+    remote_repo="https://${GITHUB_TOKEN}@${GITHUB_HOSTNAME}/${TARGET_REPOSITORY}.git"
     remote_branch=$PAGES_BRANCH
 
     echo "Using $version"
@@ -68,7 +73,7 @@ main() {
         cd public
         git init
         git config user.name "GitHub Actions"
-        git config user.email "github-actions-bot@users.noreply.github.com"
+        git config user.email "github-actions-bot@users.noreply.${GITHUB_HOSTNAME}"
         git add .
 
         git commit -m "Deploy ${TARGET_REPOSITORY} to ${TARGET_REPOSITORY}:$remote_branch"
