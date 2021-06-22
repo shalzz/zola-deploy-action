@@ -33,7 +33,7 @@ if [[ -z "$BUILD_THEMES" ]]; then
 fi
 
 if [[ -z "$GITHUB_TOKEN" ]] && [[ "$BUILD_ONLY" == false ]]; then
-    echo "Set the GITHUB_TOKEN env variable."
+    echo "Set the GITHUB_TOKEN or TOKEN env variables."
     exit 1
 fi
 
