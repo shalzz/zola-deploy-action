@@ -1,4 +1,4 @@
-from debian:stretch-slim
+from debian:stable-slim
 MAINTAINER Shaleen Jain <shaleen@jain.sh>
 
 LABEL "com.github.actions.name"="Zola Deploy to Pages"
