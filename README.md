@@ -31,7 +31,7 @@ jobs:
         PAGES_BRANCH: gh-pages
         BUILD_DIR: docs
         BUILD_FLAGS: --drafts
-        TOKEN: ${{ secrets.TOKEN }}
+        TOKEN: $GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}
 ```
 
 This example will build and deploy on master branch to gh-pages branch.
@@ -53,7 +53,7 @@ jobs:
         uses: shalzz/zola-deploy-action@master
         env:
           BUILD_DIR: .
-          TOKEN: ${{ secrets.TOKEN }}
+          TOKEN: $GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}
           BUILD_ONLY: true
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ jobs:
         env:
           PAGES_BRANCH: gh-pages
           BUILD_DIR: .
-          TOKEN: ${{ secrets.TOKEN }}
+          TOKEN: $GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}
 ```
 ## Secrets
 
