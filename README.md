@@ -31,7 +31,7 @@ jobs:
         PAGES_BRANCH: gh-pages
         BUILD_DIR: docs
         BUILD_FLAGS: --drafts
-        TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 This example will build and deploy on master branch to gh-pages branch.
@@ -53,7 +53,7 @@ jobs:
         uses: shalzz/zola-deploy-action@master
         env:
           BUILD_DIR: .
-          TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BUILD_ONLY: true
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -66,16 +66,8 @@ jobs:
         env:
           PAGES_BRANCH: gh-pages
           BUILD_DIR: .
-          TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
-## Secrets
-
- * `TOKEN`: [Personal Access key][] with the appropriate scope. If the
-    repository is public the `public_repo` scope suffices, for private
-    repositories the full `repo` scope is required. We need this to push
-    the site files back to the repo.
-    
-    ( Actions already provides a `GITHUB_TOKEN` which is an installation token and does not trigger a GitHub Pages builds hence we need a personal access token )
 
 ## Environment Variables
 * `PAGES_BRANCH`: The git branch of your repo to which the built static files will be pushed. Default is `gh-pages` branch
@@ -94,4 +86,3 @@ in `static/CNAME` so that zola puts it in the root of the public folder
 which is where GitHub expects it to be.
 
 [zola]: https://github.com/getzola/zola
-[Personal Access key]: https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
