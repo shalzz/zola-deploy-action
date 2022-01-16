@@ -2,6 +2,7 @@
 set -e
 set -o pipefail
 
+# For backwards compatibility
 if [[ -n "$TOKEN" ]]; then
     GITHUB_TOKEN=$TOKEN
 fi
@@ -53,7 +54,7 @@ main() {
     fi
 
     version=$(zola --version)
-    remote_repo="https://${GITHUB_TOKEN}@${GITHUB_HOSTNAME}/${TARGET_REPOSITORY}.git"
+    remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@${GITHUB_HOSTNAME}/${TARGET_REPOSITORY}.git"
     remote_branch=$PAGES_BRANCH
 
     echo "Using $version"
