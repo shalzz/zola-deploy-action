@@ -9,63 +9,71 @@ branch as GitHub Pages.
 ## Table of Contents
 
  - [Usage](#usage)
- - [Secrets](#secrets)
+ - [Environment Variables](#environmental-variables)
  - [Custom Domain](#custom-domain)
 
 ## Usage
 
-This example will build on push to any branch, then deploy to gh-pages.
+This example will build and deploy to gh-pages on push to the main branch.
 
 ```
-on: push
-name: Build and deploy on push
+name: Zola on GitHub Pages
+
+on: 
+ push:
+  branches:
+   - main
+
 jobs:
   build:
-    name: shalzz/zola-deploy-action
+    name: Publish site
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: shalzz/zola-deploy-action
+    - name: Checkout main
+      uses: actions/checkout@v3.0.0
+    - name: Build and deploy
       uses: shalzz/zola-deploy-action@master
       env:
-        PAGES_BRANCH: gh-pages
-        BUILD_DIR: docs
-        BUILD_FLAGS: --drafts
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-This example will build and deploy on master branch to gh-pages branch.
-Additionally will build only on pull requests.
+This example will build and deploy to gh-pages branch on a push to the main branch, 
+and it will build only on pull requests.
 ```
+name: Zola on GitHub Pages
+
 on:
   push:
     branches:
-      - master 
+      - main 
   pull_request:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/master'
+    if: github.ref != 'refs/heads/main'
     steps:
-      - name: 'Checkout'
-        uses: actions/checkout@master
-      - name: 'Build only' 
+      - name: Checkout main
+        uses: actions/checkout@v3.0.0
+      - name: Build only 
         uses: shalzz/zola-deploy-action@master
         env:
-          BUILD_DIR: .
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUILD_DIR: docs
           BUILD_ONLY: true
+          BUILD_FLAGS: --drafts
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
   build_and_deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     steps:
-      - name: 'Checkout'
-        uses: actions/checkout@master
-      - name: 'Build and deploy'
+      - name: Checkout main
+        uses: actions/checkout@v3.0.0
+      - name: Build and deploy
         uses: shalzz/zola-deploy-action@master
         env:
+          BUILD_DIR: docs
           PAGES_BRANCH: gh-pages
-          BUILD_DIR: .
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
