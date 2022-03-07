@@ -65,6 +65,15 @@ main() {
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+$BUILD_FLAGS}
 
+    if [[ "$POST_BUILD_COMMAND" ]]; then
+        echo "Post build. Your custom commands run here."
+        eval $POST_BUILD_COMMAND
+
+        if [[ "$?" != 0 ]]; then
+            exit 1
+        fi;
+    fi
+
     if ${BUILD_ONLY}; then
         echo "Build complete. Deployment skipped by request"
         exit 0

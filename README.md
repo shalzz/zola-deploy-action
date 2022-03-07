@@ -76,6 +76,7 @@ jobs:
 * `BUILD_FLAGS`: Custom build flags that you want to pass to zola while building. (Be careful supplying a different build output directory might break the action).
 * `BUILD_ONLY`: Set to value `true` if you don't want to deploy after `zola build`.
 * `BUILD_THEMES`: Set to false to disable fetching themes submodules. Default `true`.
+* `POST_BUILD_COMMAND`: Run custom script after zola build (before deploy).
 * `GITHUB_HOSTNAME`: The Github hostname to use in your action. This is to account for Enterprise instances where the base URL differs from the default, which is `github.com`.
 
 
