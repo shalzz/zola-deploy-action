@@ -33,6 +33,10 @@ if [[ -z "$BUILD_THEMES" ]]; then
     BUILD_THEMES=true
 fi
 
+if [[ -z "$CHECK_LINKS" ]]; then
+    CHECK_LINKS=false
+fi
+
 if [[ -z "$GITHUB_TOKEN" ]] && [[ "$BUILD_ONLY" == false ]]; then
     echo "Set the GITHUB_TOKEN or TOKEN env variables."
     exit 1
@@ -64,6 +68,11 @@ main() {
 
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+$BUILD_FLAGS}
+
+    if ${CHECK_LINKS}; then
+        echo "Checking links with flags: ${CHECK_FLAGS:+$CHECK_FLAGS}"
+        zola check ${CHECK_FLAGS:+$CHECK_FLAGS}
+    fi
 
     if ${BUILD_ONLY}; then
         echo "Build complete. Deployment skipped by request"
