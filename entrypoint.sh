@@ -15,6 +15,10 @@ if [[ -z "$BUILD_DIR" ]]; then
     BUILD_DIR="."
 fi
 
+if [[ -z "$OUT_DIR" ]]; then
+    OUT_DIR="public"
+fi
+
 if [[ -n "$REPOSITORY" ]]; then
     TARGET_REPOSITORY=$REPOSITORY
 else
@@ -80,7 +84,7 @@ main() {
     else
         echo "Pushing artifacts to ${TARGET_REPOSITORY}:$remote_branch"
 
-        cd public
+        cd ${OUT_DIR}
         git init
         git config user.name "GitHub Actions"
         git config user.email "github-actions-bot@users.noreply.${GITHUB_HOSTNAME}"
