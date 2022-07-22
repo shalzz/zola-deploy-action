@@ -68,7 +68,7 @@ main() {
     echo "Using $version"
 
     echo "Building in $BUILD_DIR directory"
-    cd $BUILD_DIR
+    cd "$BUILD_DIR"
 
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+$BUILD_FLAGS}
@@ -84,14 +84,14 @@ main() {
     else
         echo "Pushing artifacts to ${TARGET_REPOSITORY}:$remote_branch"
 
-        cd ${OUT_DIR}
+        cd "${OUT_DIR}"
         git init
         git config user.name "GitHub Actions"
         git config user.email "github-actions-bot@users.noreply.${GITHUB_HOSTNAME}"
         git add .
 
         git commit -m "Deploy ${TARGET_REPOSITORY} to ${TARGET_REPOSITORY}:$remote_branch"
-        git push --force "${remote_repo}" master:${remote_branch}
+        git push --force "${remote_repo}" master:"${remote_branch}"
 
         echo "Deploy complete"
     fi
