@@ -61,7 +61,8 @@ jobs:
           BUILD_DIR: docs
           BUILD_ONLY: true
           BUILD_FLAGS: --drafts
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # A GitHub token is not necessary when BUILD_ONLY is true
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
   build_and_deploy:
     runs-on: ubuntu-latest
