@@ -9,7 +9,7 @@ branch as GitHub Pages.
 ## Table of Contents
 
  - [Usage](#usage)
- - [Environment Variables](#environmental-variables)
+ - [Environment Variables](#environment-variables)
  - [Custom Domain](#custom-domain)
 
 ## Usage
