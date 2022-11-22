@@ -56,6 +56,8 @@ main() {
     git config --global url."https://".insteadOf git://
     ## $GITHUB_SERVER_URL is set as a default environment variable in all workflows, default is https://github.com
     git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@${GITHUB_HOSTNAME}":
+    #Will silence warning "Using 'master' as the name for the initial branch. This default branch name is subject to change."
+    git config --global init.defaultBranch master
     if [[ "$BUILD_THEMES" ]]; then
         echo "Fetching themes"
         git submodule update --init --recursive
