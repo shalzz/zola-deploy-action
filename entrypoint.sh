@@ -73,6 +73,10 @@ main() {
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+$BUILD_FLAGS}
 
+    if ${MINIFY}; then
+        minify -r -a -o "${OUT_DIR}" "${OUT_DIR}"
+    fi
+
     if ${CHECK_LINKS}; then
         echo "Checking links with flags: ${CHECK_FLAGS:+$CHECK_FLAGS}"
         zola check ${CHECK_FLAGS:+$CHECK_FLAGS}

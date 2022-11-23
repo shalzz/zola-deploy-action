@@ -89,6 +89,7 @@ jobs:
 * `CHECK_LINKS`: Set to `true` to check links with `zola check`.
 * `CHECK_FLAGS`: Custom check flags that you want to pass to `zola check`.
 * `GITHUB_HOSTNAME`: The Github hostname to use in your action. This is to account for Enterprise instances where the base URL differs from the default, which is `github.com`.
+* `MINIFY`: Set to true to minify output html/css/js/json/svg/xml 
 
 
 ## Custom Domain
