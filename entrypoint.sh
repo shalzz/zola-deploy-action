@@ -56,7 +56,13 @@ main() {
     git config --global url."https://".insteadOf git://
     ## $GITHUB_SERVER_URL is set as a default environment variable in all workflows, default is https://github.com
     git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@${GITHUB_HOSTNAME}":
-    if [[ "$BUILD_THEMES" ]]; then
+
+    # needed or else we get 'doubious ...' error
+    echo "Set safe directories"
+    git config --global --add safe.directory /github/workspace
+    git config --global --add safe.directory /github/workspace/themes/*
+
+    if ${BUILD_THEMES}; then
         echo "Fetching themes"
         git submodule update --init --recursive
     fi
