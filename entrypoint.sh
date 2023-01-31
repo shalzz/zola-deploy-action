@@ -11,8 +11,8 @@ if [[ -z "$PAGES_BRANCH" ]]; then
     PAGES_BRANCH="gh-pages"
 fi
 
-if [[ -z "$DEFAULT_GIT_BRANCH_NAME" ]]; then
-    DEFAULT_GIT_BRANCH_NAME="main"
+if [[ -z "$PULL_BRANCH_NAME" ]]; then
+    PULL_BRANCH_NAME="main"
 fi
 
 if [[ -z "$BUILD_DIR" ]]; then
@@ -61,13 +61,13 @@ main() {
     ## $GITHUB_SERVER_URL is set as a default environment variable in all workflows, default is https://github.com
     git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@${GITHUB_HOSTNAME}":
 
-    echo "Setting default branch to #{DEFAULT_GIT_BRANCH_NAME}"
-    git config --global init.defaultBranch $DEFAULT_GIT_BRANCH_NAME
+    echo "Setting default branch to #{PULL_BRANCH_NAME}"
+    git config --global init.defaultBranch $PULL_BRANCH_NAME
     echo "Disable some warnings"
     git config --global --add safe.directory /github/workspace
     git config --global --add safe.directory /github/workspace/themes/*
 
-    if [[ "$BUILD_THEMES" ]]; then
+    if ${BUILD_THEMES}; then
         echo "Fetching themes"
         git submodule update --init --recursive
     fi
@@ -106,7 +106,7 @@ main() {
 
         git commit -m "Deploy ${TARGET_REPOSITORY} to ${TARGET_REPOSITORY}:$remote_branch"
         echo "Git commit success"
-        git push --force "${remote_repo}" "${DEFAULT_GIT_BRANCH_NAME}:${remote_branch}"
+        git push --force "${remote_repo}" "${PULL_BRANCH_NAME}:${remote_branch}"
         echo "Git push success"
 
         echo "Deploy complete"
