@@ -6,6 +6,13 @@
 A GitHub action to automatically build and deploy your [zola] site to the master
 branch as GitHub Pages.
 
+## UPDATE: v0.16.1-2
+
+A new environment variable has been added. It's called `SOURCE_BRANCH_NAME`. If
+you're using `main` as your source code branch, you don't have to specify it.
+If you're source code branch is `master` then you are required to specify that
+in this new version.
+
 ## Table of Contents
 
  - [Usage](#usage)
@@ -32,7 +39,7 @@ jobs:
     - name: Checkout main
       uses: actions/checkout@v3.0.0
     - name: Build and deploy
-      uses: shalzz/zola-deploy-action@v0.16.1
+      uses: shalzz/zola-deploy-action@v0.16.1-1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -56,7 +63,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v3.0.0
       - name: Build only 
-        uses: shalzz/zola-deploy-action@v0.16.1
+        uses: shalzz/zola-deploy-action@v0.16.1-1
         env:
           BUILD_DIR: docs
           BUILD_ONLY: true
@@ -71,7 +78,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v3.0.0
       - name: Build and deploy
-        uses: shalzz/zola-deploy-action@v0.16.1
+        uses: shalzz/zola-deploy-action@v0.16.1-1
         env:
           BUILD_DIR: docs
           PAGES_BRANCH: gh-pages
@@ -89,6 +96,7 @@ jobs:
 * `CHECK_LINKS`: Set to `true` to check links with `zola check`.
 * `CHECK_FLAGS`: Custom check flags that you want to pass to `zola check`.
 * `GITHUB_HOSTNAME`: The Github hostname to use in your action. This is to account for Enterprise instances where the base URL differs from the default, which is `github.com`.
+* `SOURCE_BRANCH_NAME`: The branch from which the source code is fetched, usually `main` (or on older repos `master`). Default `main`.
 
 
 ## Custom Domain
