@@ -64,6 +64,7 @@ main() {
     echo "Setting default branch to #{SOURCE_BRANCH_NAME}"
     git config --global init.defaultBranch $SOURCE_BRANCH_NAME
 
+    git config --global --add safe.directory "*"
     if ${BUILD_THEMES}; then
         echo "Fetching themes"
         git submodule update --init --recursive
