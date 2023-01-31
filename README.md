@@ -14,6 +14,8 @@ branch as GitHub Pages.
 
 ## Usage
 
+In your repository **Settings > Actions > General**, in Workflow permissions, make sure that `GITHUB_TOKEN` has **Read and Write permissions**.
+
 This example will build and deploy to gh-pages on push to the main branch.
 
 ```
