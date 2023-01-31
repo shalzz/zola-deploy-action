@@ -63,6 +63,10 @@ main() {
 
     echo "Setting default branch to #{DEFAULT_GIT_BRANCH_NAME}"
     git config --global init.defaultBranch $DEFAULT_GIT_BRANCH_NAME
+    echo "Disable some warnings"
+    git config --global --add safe.directory /github/workspace
+    git config --global --add safe.directory /github/workspace/themes/*
+
     if [[ "$BUILD_THEMES" ]]; then
         echo "Fetching themes"
         git submodule update --init --recursive
