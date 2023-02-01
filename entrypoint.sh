@@ -12,7 +12,7 @@ if [[ -z "$PAGES_BRANCH" ]]; then
 fi
 
 if [[ -z "$SOURCE_BRANCH_NAME" ]]; then
-    SOURCE_BRANCH_NAME="main"
+    SOURCE_BRANCH_NAME="master"
 fi
 
 if [[ -z "$BUILD_DIR" ]]; then
