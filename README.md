@@ -16,10 +16,10 @@ branch as GitHub Pages.
 
 This example will build and deploy to gh-pages on push to the main branch.
 
-```
+```yaml
 name: Zola on GitHub Pages
 
-on: 
+on:
  push:
   branches:
    - main
@@ -34,20 +34,22 @@ jobs:
     - name: Build and deploy
       uses: shalzz/zola-deploy-action@v0.16.1-1
       env:
+        # WORKING_DIR: sub_dir # Use this variable if your repository is cloned to a subdirectory
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-This example will build and deploy to gh-pages branch on a push to the main branch, 
+This example will build and deploy to gh-pages branch on a push to the main branch,
 and it will build only on pull requests.
-```
+
+```yaml
 name: Zola on GitHub Pages
 
 on:
   push:
     branches:
-      - main 
+      - main
   pull_request:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -55,7 +57,7 @@ jobs:
     steps:
       - name: Checkout main
         uses: actions/checkout@v3.0.0
-      - name: Build only 
+      - name: Build only
         uses: shalzz/zola-deploy-action@v0.16.1-1
         env:
           BUILD_DIR: docs
@@ -63,7 +65,7 @@ jobs:
           BUILD_FLAGS: --drafts
           # A GitHub token is not necessary when BUILD_ONLY is true
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
   build_and_deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -93,7 +95,7 @@ jobs:
 
 ## Custom Domain
 
-If you're using a custom domain for your GitHub Pages site put the CNAME 
+If you're using a custom domain for your GitHub Pages site put the CNAME
 in `static/CNAME` so that zola puts it in the root of the public folder
 which is where GitHub expects it to be.
 
