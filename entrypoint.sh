@@ -95,17 +95,12 @@ main() {
 
         cd "${OUT_DIR}"
         git init
-        echo "Init success"
         git config user.name "GitHub Actions"
         git config user.email "github-actions-bot@users.noreply.${GITHUB_HOSTNAME}"
-        echo "Configured git success"
         git add .
-        echo "Git add success"
 
         git commit -m "Deploy ${TARGET_REPOSITORY} to ${TARGET_REPOSITORY}:$remote_branch"
-        echo "Git commit success"
         git push --force "${remote_repo}" "${SOURCE_BRANCH_NAME}:${remote_branch}"
-        echo "Git push success"
 
         echo "Deploy complete"
     fi
