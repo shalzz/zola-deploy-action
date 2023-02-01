@@ -53,6 +53,9 @@ fi
 main() {
     echo "Starting deploy..."
 
+    echo "Building in $BUILD_DIR directory"
+    cd "$BUILD_DIR"
+
     git config --global url."https://".insteadOf git://
     ## $GITHUB_SERVER_URL is set as a default environment variable in all workflows, default is https://github.com
     git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@${GITHUB_HOSTNAME}":
@@ -72,9 +75,6 @@ main() {
     remote_branch=$PAGES_BRANCH
 
     echo "Using $version"
-
-    echo "Building in $BUILD_DIR directory"
-    cd "$BUILD_DIR"
 
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+$BUILD_FLAGS}
