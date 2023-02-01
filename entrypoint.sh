@@ -11,6 +11,10 @@ if [[ -z "$PAGES_BRANCH" ]]; then
     PAGES_BRANCH="gh-pages"
 fi
 
+if [[ -z "$WORKING_DIR" ]]; then
+    WORKING_DIR="."
+fi
+
 if [[ -z "$BUILD_DIR" ]]; then
     BUILD_DIR="."
 fi
@@ -52,6 +56,8 @@ fi
 
 main() {
     echo "Starting deploy..."
+
+    pushd "${WORKING_DIR}"
 
     git config --global url."https://".insteadOf git://
     ## $GITHUB_SERVER_URL is set as a default environment variable in all workflows, default is https://github.com
@@ -96,6 +102,8 @@ main() {
 
         echo "Deploy complete"
     fi
+
+    popd
 }
 
 main "$@"
