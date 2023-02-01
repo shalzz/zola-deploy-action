@@ -61,9 +61,6 @@ main() {
     ## $GITHUB_SERVER_URL is set as a default environment variable in all workflows, default is https://github.com
     git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@${GITHUB_HOSTNAME}":
 
-    echo "Setting default branch to #{SOURCE_BRANCH_NAME}"
-    git config --global init.defaultBranch $SOURCE_BRANCH_NAME
-
     git config --global --add safe.directory "*"
     if ${BUILD_THEMES}; then
         echo "Fetching themes"
