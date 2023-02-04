@@ -7,6 +7,10 @@ if [[ -n "$TOKEN" ]]; then
     GITHUB_TOKEN=$TOKEN
 fi
 
+if [[ -n "$CNAME" ]]; then
+    CNAME=$CNAME
+fi
+
 if [[ -z "$PAGES_BRANCH" ]]; then
     PAGES_BRANCH="gh-pages"
 fi
@@ -91,6 +95,9 @@ main() {
         echo "Pushing artifacts to ${TARGET_REPOSITORY}:$remote_branch"
 
         cd "${OUT_DIR}"
+        if [ -n "$CNAME" ]; then
+            echo "${CNAME}" > CNAME
+        fi
         git init
         git config user.name "GitHub Actions"
         git config user.email "github-actions-bot@users.noreply.${GITHUB_HOSTNAME}"
