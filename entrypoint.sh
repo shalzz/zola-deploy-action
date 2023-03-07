@@ -53,12 +53,21 @@ fi
 main() {
     echo "Starting deploy..."
 
+    echo "Building in $BUILD_DIR directory"
+    cd "$BUILD_DIR"
+
     git config --global url."https://".insteadOf git://
     ## $GITHUB_SERVER_URL is set as a default environment variable in all workflows, default is https://github.com
     git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@${GITHUB_HOSTNAME}":
     #Will silence warning "Using 'master' as the name for the initial branch. This default branch name is subject to change."
     git config --global init.defaultBranch master
-    if [[ "$BUILD_THEMES" ]]; then
+    # needed or else we get 'doubious ...' error
+    echo "Set safe directories"
+    git config --global --add safe.directory /github/workspace
+    git config --global --add safe.directory /github/workspace/sass/**/*
+    git config --global --add safe.directory /github/workspace/themes/*
+
+    if ${BUILD_THEMES}; then
         echo "Fetching themes"
         git submodule update --init --recursive
     fi
@@ -68,9 +77,6 @@ main() {
     remote_branch=$PAGES_BRANCH
 
     echo "Using $version"
-
-    echo "Building in $BUILD_DIR directory"
-    cd "$BUILD_DIR"
 
     echo Building with flags: ${BUILD_FLAGS:+"$BUILD_FLAGS"}
     zola build ${BUILD_FLAGS:+$BUILD_FLAGS}
