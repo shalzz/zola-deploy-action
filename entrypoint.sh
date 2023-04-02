@@ -61,10 +61,15 @@ main() {
     git config --global url."$GITHUB_SERVER_URL/".insteadOf "git@${GITHUB_HOSTNAME}":
 
     # needed or else we get 'doubious ...' error
-    echo "Set safe directories"
+    echo "Set safe directories:"
+    echo " - /github/workspace"
     git config --global --add safe.directory /github/workspace
-    git config --global --add safe.directory /github/workspace/sass/**/*
-    git config --global --add safe.directory /github/workspace/themes/*
+    echo " - /github/workspace/sass/"
+    git config --global --add safe.directory /github/workspace/sass/
+    echo " - /github/workspace/themes/"
+    git config --global --add safe.directory /github/workspace/themes/
+    
+    echo
 
     if ${BUILD_THEMES}; then
         echo "Fetching themes"
