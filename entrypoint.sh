@@ -62,12 +62,14 @@ main() {
 
     # needed or else we get 'doubious ...' error
     echo "Set safe directories:"
-    echo " - /github/workspace"
-    git config --global --add safe.directory /github/workspace
-    echo " - /github/workspace/sass/"
-    git config --global --add safe.directory /github/workspace/sass/
-    echo " - /github/workspace/themes/"
-    git config --global --add safe.directory /github/workspace/themes/
+    git config --global --add safe.directory '*'
+    
+   #echo " - /github/workspace"
+   #git config --global --add safe.directory /github/workspace
+   #echo " - /github/workspace/sass/"
+   #git config --global --add safe.directory '/github/workspace/sass/*'
+   #echo " - /github/workspace/themes/"
+   #git config --global --add safe.directory '/github/workspace/themes/*'
     
     echo
 
