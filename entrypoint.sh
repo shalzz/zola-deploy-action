@@ -64,6 +64,8 @@ main() {
     echo "Disable safe directory check"
     git config --global --add safe.directory '*'
 
+    git config --global init.defaultBranch 'gh_action' # avoid warning re. default branch name change
+
     if ${BUILD_THEMES}; then
         echo "Fetching themes"
         git submodule update --init --recursive
@@ -96,7 +98,7 @@ main() {
         git add .
 
         git commit -m "Deploy ${TARGET_REPOSITORY} to ${TARGET_REPOSITORY}:$remote_branch"
-        git push --force "${remote_repo}" master:"${remote_branch}"
+        git push --force "${remote_repo}" gh_action:"${remote_branch}"
 
         echo "Deploy complete"
     fi
