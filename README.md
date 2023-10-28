@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout main
-      uses: actions/checkout@v3.0.0
+      uses: actions/checkout@v4
     - name: Build and deploy
       uses: shalzz/zola-deploy-action@v0.17.2
       env:
@@ -56,7 +56,7 @@ jobs:
     if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout main
-        uses: actions/checkout@v3.0.0
+        uses: actions/checkout@v4
       - name: Build only 
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
@@ -71,7 +71,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout main
-        uses: actions/checkout@v3.0.0
+        uses: actions/checkout@v4
       - name: Build and deploy
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
