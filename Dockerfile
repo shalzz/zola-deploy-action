@@ -13,7 +13,7 @@ ENV LANGUAGE en_US.UTF-8
 RUN apt-get update && apt-get install -y wget git
 
 RUN wget -q -O - \
-"https://github.com/getzola/zola/releases/download/v0.18.0/zola-v0.18.0-x86_64-unknown-linux-gnu.tar.gz" \
+"https://github.com/getzola/zola/releases/download/v0.19.0/zola-v0.19.0-x86_64-unknown-linux-gnu.tar.gz" \
 | tar xzf - -C /usr/local/bin
 
 COPY entrypoint.sh /entrypoint.sh
