@@ -1,5 +1,4 @@
-from debian:stable-slim
-MAINTAINER Shaleen Jain <shaleen@jain.sh>
+FROM debian:stable-slim
 
 LABEL "com.github.actions.name"="Zola Deploy to Pages"
 LABEL "com.github.actions.description"="Build and deploy a Zola site to GitHub Pages"
