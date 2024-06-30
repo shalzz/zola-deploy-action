@@ -2,12 +2,7 @@ base_url = "https://zola-sam.janbaudisch.dev"
 title = "Sam"
 
 compile_sass = true
-
-highlight_code = true
-
 build_search_index = false
-
-check_external_links = true
 
 taxonomies = [
     {name = "tags", rss = true}
