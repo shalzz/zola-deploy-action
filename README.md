@@ -18,8 +18,11 @@ In your repository **Settings > Actions > General**, in Workflow permissions, ma
 
 This example will build and deploy to gh-pages on push to the main branch.
 
-```
+```yml
 name: Zola on GitHub Pages
+
+permissions:
+  contents: read
 
 on: 
  push:
@@ -30,6 +33,8 @@ jobs:
   build:
     name: Publish site
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Checkout main
       uses: actions/checkout@v4
@@ -41,15 +46,18 @@ jobs:
 
 This example will build and deploy to gh-pages branch on a push to the main branch, 
 and it will build only on pull requests.
-```
+```yml
 name: Zola on GitHub Pages
+
+permissions:
+  contents: read
 
 on:
   push:
     branches:
-      - main 
+      - main
   pull_request:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -57,7 +65,7 @@ jobs:
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
-      - name: Build only 
+      - name: Build only
         uses: shalzz/zola-deploy-action@v0.19.2
         env:
           BUILD_DIR: docs
@@ -65,10 +73,12 @@ jobs:
           BUILD_FLAGS: --drafts
           # A GitHub token is not necessary when BUILD_ONLY is true
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
   build_and_deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
