@@ -21,9 +21,6 @@ This example will build and deploy to gh-pages on push to the main branch.
 ```yml
 name: Zola on GitHub Pages
 
-permissions:
-  contents: read
-
 on: 
  push:
   branches:
@@ -33,8 +30,6 @@ jobs:
   build:
     name: Publish site
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
     - name: Checkout main
       uses: actions/checkout@v4
@@ -48,9 +43,6 @@ This example will build and deploy to gh-pages branch on a push to the main bran
 and it will build only on pull requests.
 ```yml
 name: Zola on GitHub Pages
-
-permissions:
-  contents: read
 
 on:
   push:
@@ -77,8 +69,6 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    permissions:
-      contents: write
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
