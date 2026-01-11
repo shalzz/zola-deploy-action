@@ -4,8 +4,11 @@ title = "Sam"
 compile_sass = true
 build_search_index = false
 
+# The 'feed' field replaces the deprecated 'rss' field (changed in Zola v0.11.0)
+# This enables feed generation for the taxonomy. See:
+# https://www.getzola.org/documentation/content/taxonomies/#configuration
 taxonomies = [
-    {name = "tags", rss = true}
+    {name = "tags", feed = true}
 ]
 
 [extra]

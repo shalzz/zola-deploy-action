@@ -34,7 +34,7 @@ jobs:
     - name: Checkout main
       uses: actions/checkout@v4
     - name: Build and deploy
-      uses: shalzz/zola-deploy-action@v0.21.0
+      uses: siddhantladdha/zola-deploy-action@v0.22.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -58,7 +58,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
       - name: Build only
-        uses: shalzz/zola-deploy-action@v0.21.0
+        uses: siddhantladdha/zola-deploy-action@v0.22.0
         env:
           BUILD_DIR: docs
           BUILD_ONLY: true
@@ -73,7 +73,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
       - name: Build and deploy
-        uses: shalzz/zola-deploy-action@v0.21.0
+        uses: siddhantladdha/zola-deploy-action@v0.22.0
         env:
           BUILD_DIR: docs
           PAGES_BRANCH: gh-pages
@@ -91,6 +91,36 @@ jobs:
 * `CHECK_LINKS`: Set to `true` to check links with `zola check`.
 * `CHECK_FLAGS`: Custom check flags that you want to pass to `zola check`.
 * `GITHUB_HOSTNAME`: The Github hostname to use in your action. This is to account for Enterprise instances where the base URL differs from the default, which is `github.com`.
+
+
+## Upgrading from v0.21.0 to v0.22.0
+
+Zola v0.22.0 includes breaking changes related to syntax highlighting. If your site uses custom syntax highlighting configuration, you'll need to update your `config.toml`:
+
+### Breaking Changes
+
+1. **Syntax Highlighting Configuration**: The highlighting options have been moved from `[markdown]` to `[markdown.highlighting]` section.
+
+   **Before (v0.21.0 and earlier):**
+   ```toml
+   [markdown]
+   highlight_code = true
+   highlight_theme = "base16-ocean-dark"
+   ```
+
+   **After (v0.22.0+):**
+   ```toml
+   [markdown.highlighting]
+   theme = "gruvbox-dark"
+   ```
+
+2. **Theme Names Changed**: Syntax highlighting themes have been updated. You can find the new themes at [textmate-grammars-themes.netlify.app](https://textmate-grammars-themes.netlify.app/).
+
+For more details, see the [Zola v0.22.0 changelog](https://github.com/getzola/zola/releases/tag/v0.22.0) and the [syntax highlighting documentation](https://www.getzola.org/documentation/content/syntax-highlighting/).
+
+### Action Compatibility
+
+The GitHub Action itself is fully compatible with Zola v0.22.0 and requires no changes to your workflow YAML files. All environment variables and build flags continue to work as before.
 
 
 ## Custom Domain
