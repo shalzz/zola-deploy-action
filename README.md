@@ -116,11 +116,6 @@ Zola v0.22.0 includes breaking changes related to syntax highlighting. If your s
 
 2. **Theme Names Changed**: Syntax highlighting themes have been updated. You can find the new themes at [textmate-grammars-themes.netlify.app](https://textmate-grammars-themes.netlify.app/).
 
-3. **Other Changes**:
-   - `zola serve` WebSocket now listens on the same port as HTTP
-   - Logging now uses `RUST_LOG` environment variable instead of `ZOLA_PERF_LOG`
-   - License changed to EUPL 1.2
-
 For more details, see the [Zola v0.22.0 changelog](https://github.com/getzola/zola/releases/tag/v0.22.0) and the [syntax highlighting documentation](https://www.getzola.org/documentation/content/syntax-highlighting/).
 
 ### Action Compatibility
