@@ -5,7 +5,7 @@ compile_sass = true
 build_search_index = false
 
 taxonomies = [
-    {name = "tags", rss = true}
+    {name = "tags", feed = true}
 ]
 
 [extra]
