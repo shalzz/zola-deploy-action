@@ -116,27 +116,7 @@ Zola v0.22.0 includes breaking changes related to syntax highlighting. If your s
 
 2. **Theme Names Changed**: Syntax highlighting themes have been updated. You can find the new themes at [textmate-grammars-themes.netlify.app](https://textmate-grammars-themes.netlify.app/).
 
-3. **CSS Class Output**:
-
-   **Before (v0.21.0 and earlier):**
-   ```toml
-   [markdown]
-   highlight_code = true
-   highlight_theme = "css"
-   highlight_themes_css = [
-     { theme = "base16-ocean-dark", filename = "syntax-theme-dark.css" },
-     { theme = "base16-ocean-light", filename = "syntax-theme-light.css" },
-   ]
-   ```
-
-   **After (v0.22.0+):**
-   ```toml
-   [markdown.highlighting]
-   theme = "gruvbox-dark"
-   style = "class"
-   ```
-
-4. **Other Changes**:
+3. **Other Changes**:
    - `zola serve` WebSocket now listens on the same port as HTTP
    - Logging now uses `RUST_LOG` environment variable instead of `ZOLA_PERF_LOG`
    - License changed to EUPL 1.2
