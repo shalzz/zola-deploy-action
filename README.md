@@ -34,10 +34,13 @@ jobs:
     - name: Checkout main
       uses: actions/checkout@v4
     - name: Build and deploy
-      uses: shalzz/zola-deploy-action@v0.21.0
+      uses: shalzz/zola-deploy-action@v0.22.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+The action's version tags follow the version of Zola that should be used to build.
+To use Zola v0.21.0 for instance, specify `shalzz/zola-deploy-action@v0.21.0`.
 
 This example will build and deploy to gh-pages branch on a push to the main branch, 
 and it will build only on pull requests.
@@ -58,7 +61,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
       - name: Build only
-        uses: shalzz/zola-deploy-action@v0.21.0
+        uses: shalzz/zola-deploy-action@v0.22.0
         env:
           BUILD_DIR: docs
           BUILD_ONLY: true
@@ -73,7 +76,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
       - name: Build and deploy
-        uses: shalzz/zola-deploy-action@v0.21.0
+        uses: shalzz/zola-deploy-action@v0.22.0
         env:
           BUILD_DIR: docs
           PAGES_BRANCH: gh-pages
