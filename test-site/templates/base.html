@@ -1,7 +1,5 @@
 {% extends "index.html" %}
 
-{% import "macros.html" as macros %}
-
 {% block htmltitle %}
 {% endblock htmltitle %}
 
@@ -13,7 +11,7 @@
         <div class="section" id="content">
             {% block content %}{% endblock content %}
         </div>
-        {{ macros::bottom_menu() }}
-        {{ macros::footer() }}
+        {{<bottom_menu config={config} />}}
+        {{<footer config={config} />}}
     </div>
 {% endblock body %}

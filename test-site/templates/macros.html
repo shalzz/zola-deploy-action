@@ -1,15 +1,15 @@
-{% macro title_or_last(component, offset=2) %}
+{% component title_or_last(component, offset=2) %}
     {% set length = component.components | length %}
-    {% set name = component.components | slice(end=length - offset) | last %}
+    {% set name = component.components[:length - offset] | last %}
     {{ component.title | default(value=name) }}
-{% endmacro title_or_last %}
+{% endcomponent title_or_last %}
 
-{% macro format_date(date) %}
+{% component format_date(date, config) %}
     {% set date_format = config.extra.date_format | default(value="%a %b %e, %Y") %}
     {{ date | date(format=date_format) }}
-{% endmacro format_date %}
+{% endcomponent format_date %}
 
-{% macro bottom_menu() %}
+{% component bottom_menu(config) %}
     <div class="section bottom-menu">
         <hr/>
         <p>
@@ -22,7 +22,7 @@
                 {% set index = get_section(path="_index.md") %}
                 {% for current in index.subsections %}
                     {% set current = get_section(path=current) %}
-                    <a href="{{ current.permalink }}">{{ macros::title_or_last(component=current) }}</a>
+                    <a href="{{ current.permalink }}">{{<title_or_last component={current} />}}</a>
                     &#183;
                 {% endfor %}
             {% endif %}
@@ -31,12 +31,12 @@
             </a>
         </p>
     </div>
-{% endmacro bottom_menu %}
+{% endcomponent bottom_menu %}
 
-{% macro footer() %}
+{% component footer(config) %}
     {% if config.extra.sam_footer %}
         <div class="section footer">
             {{ config.extra.sam_footer.text | safe }}
         </div>
     {% endif %}
-{% endmacro footer %}
+{% endcomponent footer %}

@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% import "macros.html" as macros %}
-
 {% block htmltitle %}
     {{ page.title }}
 {% endblock htmltitle %}
@@ -13,7 +11,7 @@
 {% block content %}
     {% if not page.extra.no_header %}
         {% if page.date %}
-            {{ macros::format_date(date=page.date) }}
+            {{<format_date date={page.date} config={config} />}}
         {% endif %}
         {% if config.extra.show_word_count and not page.extra.hide_word_count %}
             {% if page.date %}
@@ -34,7 +32,7 @@
             <div class="tag-container">
                 {% for tag in page.taxonomies.tags %}
                     <span class="tag">
-                        <a href="{{ get_taxonomy_url(kind='tags', name=tag) }}">
+                        <a href="{{ get_taxonomy_url(kind='tags', term=tag) }}">
                             {{ tag }}
                         </a>
                     </span>
