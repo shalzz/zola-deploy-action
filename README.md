@@ -34,7 +34,7 @@ jobs:
     - name: Checkout main
       uses: actions/checkout@v4
     - name: Build and deploy
-      uses: shalzz/zola-deploy-action@v0.23.2
+      uses: shalzz/zola-deploy-action@v0.23.3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -61,7 +61,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
       - name: Build only
-        uses: shalzz/zola-deploy-action@v0.23.2
+        uses: shalzz/zola-deploy-action@v0.23.3
         env:
           BUILD_DIR: docs
           BUILD_ONLY: true
@@ -76,7 +76,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
       - name: Build and deploy
-        uses: shalzz/zola-deploy-action@v0.23.2
+        uses: shalzz/zola-deploy-action@v0.23.3
         env:
           BUILD_DIR: docs
           PAGES_BRANCH: gh-pages
